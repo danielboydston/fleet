@@ -1,0 +1,18 @@
+Setup
+
+.devcontainer/devcontainer.env
+    Place environment files here for database connection
+
+########################################################################
+Database Migrations
+
+Record Determine and record migration 
+    alembic revision --autogenerate -m "[Note]"
+
+Undo last migration
+    alembic downgrade -1
+
+Push migration changes to the database
+    alembic upgrade head
+
+########################################################################

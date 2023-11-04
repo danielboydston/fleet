@@ -1,0 +1,22 @@
+{
+    "name": "Fleet Backend",
+    "build": {
+        "context": "..",
+        "dockerfile": "../Dockerfile"
+    },
+    "initializeCommand": "docker network inspect fleet-net > /dev/null || docker network create fleet-net --attachable",
+    "runArgs": [
+        "--hostname=api.airwarrior.local",
+        "--network=fleet-net",
+        "--env-file=.devcontainer/devcontainer.env"
+    ],
+    "appPort": ["3001:80"],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ]
+        }
+    }
+}

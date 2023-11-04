@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb
+    volumes:
+      - ./data:/var/lib/mysql
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    networks:
+      - fleet-net
+    secrets:
+      - db_root_password
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    networks:
+      - fleet-net
+    environment:
+      - PMA-ARBITRARY=1
+
+networks:
+  fleet-net:
+    external: true
+
+secrets:
+  db_root_password:
+    file: db_root_password.txt
