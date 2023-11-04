@@ -1,8 +1,9 @@
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session, select
-from .db import engine, create_db_and_tables
+from .db import engine, create_db_and_tables, create_static_data
 from .models import User
+import logging
 
 app = FastAPI(
     title="Fleet API",
@@ -35,3 +36,10 @@ async def getUser(user_id):
         statement = select(User).where(User.id == user_id)
         user = session.exec(statement).first()
     return user
+
+
+@app.get("/db/create-static-data")
+async def static_data():
+    logging.info("main.py.create_static_data()")
+    create_static_data()
+    return {"success": True}

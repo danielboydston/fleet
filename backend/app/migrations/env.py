@@ -6,7 +6,6 @@ from sqlalchemy import pool
 from alembic import context
 
 from models import *
-from db import mysql_url
 
 import os
 
